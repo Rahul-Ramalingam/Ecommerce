@@ -28,7 +28,7 @@ namespace Ecommerce.Client.Pages
             }
         }
 
-        private ProductVariant GetSelectedVariant()
+        private ProductVariant? GetSelectedVariant()
         {
             return product?.Variants?.FirstOrDefault(v => v.ProductTypeId == currentTypeId);
         }

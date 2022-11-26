@@ -1,5 +1,6 @@
 ﻿using Ecommerce.Server.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Tracing;
 
 namespace Ecommerce.Server.Services.Products
 {
@@ -53,6 +54,47 @@ namespace Ecommerce.Server.Services.Products
             };
 
             return response;
+        }
+
+        public async Task<ServiceResponse<List<string>>> GetProductSearchSuggestions(string searchText)
+        {
+            var products = await SearchProduct(searchText);
+            List<string> result = new List<string>();
+
+            foreach (var product in products)
+            {
+                if(product.Title.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.Add(product.Title);
+                }
+
+                if (product.Description != null)
+                {
+                    var punctuation = product.Description.Where(char.IsPunctuation)
+                        .Distinct().ToArray();
+                    var words = product.Description.Split().Select(s => s.Trim(punctuation));
+
+                    result.AddRange(words.Where(w => w.Contains(searchText, StringComparison.OrdinalIgnoreCase) && !result.Contains(w)));
+                }
+            }
+            return new ServiceResponse<List<string>> { Data = result};
+        }
+
+        public async Task<ServiceResponse<List<Product>>> SearchProducts(string searchText)
+        {
+            var response = new ServiceResponse<List<Product>>
+            {
+                Data = await SearchProduct(searchText)
+            };
+            return response;
+        }
+
+        private Task<List<Product>> SearchProduct(string searchText)
+        {
+            return _dbContext.Products.Where(p => p.Title.ToLower().Contains(searchText.ToLower())
+                                                                  || p.Description.ToLower().Contains(searchText.ToLower()))
+                                                            .Include(p => p.Variants)
+                                                            .ToListAsync();
         }
     }
 }

@@ -2,7 +2,7 @@
 @implements IDisposable
 
 @if(ProductsService.Products == null || ProductsService.Products.Count == 0){
-    <span>Loading...</span>
+    <span>@ProductsService.Meassage</span>
 }
 else{
     <ul class="list-unstyled">
