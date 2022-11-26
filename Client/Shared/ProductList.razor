@@ -1,4 +1,5 @@
 ﻿@inject IProductsService ProductsService
+@implements IDisposable
 
 @if(ProductsService.Products == null || ProductsService.Products.Count == 0){
     <span>Loading...</span>

@@ -7,9 +7,14 @@ namespace Ecommerce.Client.Shared
     {
         public static List<Product> products = new();
 
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-            await ProductsService.GetProductsAsync();
+            ProductsService.ProductsChanged += StateHasChanged;
+        }
+
+        public void Dispose()
+        {
+            ProductsService.ProductsChanged -= StateHasChanged;
         }
     }
 }
