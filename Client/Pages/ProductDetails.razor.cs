@@ -7,6 +7,7 @@ namespace Ecommerce.Client.Pages
     {
         private Product? product = null;
         private string message = string.Empty;
+        private int currentTypeId = 1;
 
         [Parameter]
         public int Id { get; set; }
@@ -22,8 +23,14 @@ namespace Ecommerce.Client.Pages
             }
             else
             {
+                currentTypeId = result.Data.Variants.FirstOrDefault().ProductTypeId;
                 product = result.Data;
             }
+        }
+
+        private ProductVariant GetSelectedVariant()
+        {
+            return product?.Variants?.FirstOrDefault(v => v.ProductTypeId == currentTypeId);
         }
     }
 }

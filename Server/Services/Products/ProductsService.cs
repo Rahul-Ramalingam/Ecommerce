@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Server.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Server.Services.Products
 {
@@ -13,14 +14,20 @@ namespace Ecommerce.Server.Services.Products
         {
             return new ServiceResponse<List<Product>>()
             {
-                Data = await _dbContext.Products.ToListAsync()
+                Data = await _dbContext.Products
+                .Include(v => v.Variants)
+                .ThenInclude(p => p.ProductType)
+                .ToListAsync()
             };
         }
 
         public async Task<ServiceResponse<Product>> GetProductsAsync(int productId)
         {
             var response = new ServiceResponse<Product>();
-            var product = await _dbContext.Products.FindAsync(productId);
+            var product = await _dbContext.Products
+                .Include(v=>v.Variants)
+                .ThenInclude(p => p.ProductType)
+                .FirstOrDefaultAsync(p => p.Id == productId);
             if (product == null)
             {
                 response.Success = false;
@@ -40,6 +47,8 @@ namespace Ecommerce.Server.Services.Products
             {
                 Data = await _dbContext.Products
                         .Where(p => p.Category.Url.ToLower() == categoryUrl.ToLower())
+                        .Include(v => v.Variants)
+                        .ThenInclude(p => p.ProductType)
                         .ToListAsync()
             };
 
