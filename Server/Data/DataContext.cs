@@ -53,7 +53,8 @@
                     Title = "Spider Man",
                     Description = "Spider-Man is a superhero appearing in American comic books published by Marvel Comics. Created by writer-editor Stan Lee and artist Steve Ditko, he first appeared in the anthology comic book Amazing Fantasy #15 (August 1962) in the Silver Age of Comic Books.",
                     ImageUrl = "https://m.media-amazon.com/images/I/81+HImlvK4L.jpg",
-                    CategoryId = 1
+                    CategoryId = 1,
+                    Featured = true
                 },
                new Product
                {
@@ -69,7 +70,8 @@
                    Title = "Thor",
                    Description = "Thor is a 2011 American superhero film based on the Marvel Comics character of the same name. Produced by Marvel Studios and distributed by Paramount Pictures,[N 1] it is the fourth film in the Marvel Cinematic Universe (MCU). It was directed by Kenneth Branagh, written by the writing team of Ashley Edward Miller and Zack Stentz along with Don Payne, and stars Chris Hemsworth as the title character alongside Natalie Portman, Tom Hiddleston, Stellan Skarsgård, Colm Feore, Ray Stevenson, Idris Elba, Kat Dennings, Rene Russo, and Anthony Hopkins. After reigniting a dormant war, Thor is banished from Asgard to Earth, stripped of his powers and his hammer Mjölnir. As his brother Loki (Hiddleston) plots to take the Asgardian throne, Thor must prove himself worthy.",
                    ImageUrl = "https://i0.wp.com/books.disney.com/content/uploads/2013/09/1423193318-scaled.jpg?fit=2048%2C2560&ssl=1",
-                   CategoryId = 1
+                   CategoryId = 1,
+                   Featured = true
                },
                 new Product
                 {
@@ -112,6 +114,7 @@
                     Title = "Diablo II",
                     Description = "Diablo II is an action role-playing hack-and-slash computer video game developed by Blizzard North and published by Blizzard Entertainment in 2000 for Microsoft Windows, Classic Mac OS, and macOS.",
                     ImageUrl = "https://upload.wikimedia.org/wikipedia/en/d/d5/Diablo_II_Coverart.png",
+                    Featured = true
                 },
                 new Product
                 {

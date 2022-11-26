@@ -22,6 +22,13 @@ namespace Ecommerce.Server.Controllers
             return Ok(response);
         }
 
+        [HttpGet("featured")]
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetFeaturedProducts()
+        {
+            var response = await _productsService.GetFeaturedProductsAsync();
+            return Ok(response);
+        }
+
         [HttpGet("{productId}")]
         public async Task<ActionResult<ServiceResponse<Product>>> GetProduct(int productId)
         {
