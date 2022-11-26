@@ -9,9 +9,7 @@ namespace Ecommerce.Client.Shared
 
         protected override async Task OnInitializedAsync()
         {
-            var result = await Http.GetFromJsonAsync<List<Product>>("api/Product");
-            if(result != null)
-                products = result;
+            await ProductsService.GetProductsAsync();
         }
     }
 }
