@@ -23,7 +23,7 @@ namespace Ecommerce.Client.Shared
             if (!string.IsNullOrEmpty(searchText))
                 NavigationManager.NavigateTo($"search/*");
 
-            NavigationManager.NavigateTo($"search/{searchText}");
+            NavigationManager.NavigateTo($"search/{searchText}/1");
         }
 
         public async Task HandleSearch(KeyboardEventArgs args)

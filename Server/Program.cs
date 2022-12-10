@@ -3,7 +3,7 @@ global using Microsoft.EntityFrameworkCore;
 global using Ecommerce.Server.Data;
 global using Ecommerce.Server.Services.Categories;
 global using Ecommerce.Server.Services.Products;
-using Microsoft.AspNetCore.ResponseCompression;
+global using Ecommerce.Server.Services.CartService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +21,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IProductsService, ProductsService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICartDataService, CartDataService>();
 
 var app = builder.Build();
 

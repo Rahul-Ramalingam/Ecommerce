@@ -32,5 +32,16 @@ namespace Ecommerce.Client.Pages
         {
             return product?.Variants?.FirstOrDefault(v => v.ProductTypeId == currentTypeId);
         }
+
+        private async Task AddToCart()
+        {
+            var productVariant = GetSelectedVariant();
+            var cartItem = new CartItem
+            {
+                ProductId = productVariant.ProductId,
+                ProductTypeId = productVariant.ProductTypeId
+            };
+            await CartService.AddToCart(cartItem);
+        }
     }
 }
