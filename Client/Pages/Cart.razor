@@ -4,7 +4,7 @@
 <PageTitle>Cart</PageTitle>
 <h3>Shopping Cart</h3>
 @if(cartProducts == null || cartProducts.Count == 0){
-    <span>message</span>
+    <span>@message</span>
 }
 else{
     <div>
@@ -16,12 +16,15 @@ else{
                </div>
                <div class="name">
                    <h5><a href="/product/@product.ProductId">@product.Title</a></h5>
-                   <span>@product.ProductType</span>
-               </div>
-               <div class="cart-product-price">
-                   Total (@cartProducts.Count): $@cartProducts.Sum(pro => @pro.Price)
-               </div>
+                   <span>@product.ProductType</span><br/>
+                   <input type="number" value="@product.Quantity" @onchange="@((ChangeEventArgs e) => UpdateQuantity(e, product))" class="form-control input-quantity"/>
+                    <button class="btn-delete" @onclick="@(() => RemoveProductFromCart(product.ProductId, product.ProductTypeId))">Delete</button>
+                </div>
+                <div class="cart-product-price"> ₹@(product.Price * product.Quantity)</div>
            </div>
        }
+        <div class="container cart-product-price" style="display:block">
+            Total (@cartProducts.Count): ₹@cartProducts.Sum(pro => @pro.Price * pro.Quantity)
+        </div>
     </div>
 }

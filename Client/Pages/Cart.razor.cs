@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Shared;
+using Microsoft.AspNetCore.Components;
 
 namespace Ecommerce.Client.Pages
 {
@@ -9,7 +10,18 @@ namespace Ecommerce.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            if((await CartService.GetCartItems()).Count == 0)
+            await LoadCart();
+        }
+
+        private async Task RemoveProductFromCart(int productID, int productTypeId)
+        {
+            await CartService.RemoveProductFromCart(productID, productTypeId);
+            await LoadCart();
+        }
+
+        private async Task LoadCart()
+        {
+            if ((await CartService.GetCartItems()).Count == 0)
             {
                 message = "Your Cart is Empty...";
                 cartProducts = new List<CartProductResponseDto>();
@@ -18,6 +30,15 @@ namespace Ecommerce.Client.Pages
             {
                 cartProducts = await CartService.GetCartProducts();
             }
+        }
+
+        private async Task UpdateQuantity(ChangeEventArgs e, CartProductResponseDto product)
+        {
+            product.Quantity = int.Parse(e.Value.ToString());
+            if(product.Quantity < 1) {
+                product.Quantity = 1;
+            }
+            await CartService.UpdateQuantity(product);
         }
     }
 }
