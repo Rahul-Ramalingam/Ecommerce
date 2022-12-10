@@ -1,5 +1,6 @@
 ﻿@page "/product/{id:int}"
 @inject IProductsService ProductService
+@inject ICartService CartService
 
 @if(product == null){
     <span>@message</span>
@@ -36,6 +37,9 @@ else{
             }else{
                 <h4 class="text-muted">Price Not Found</h4>
             }
+            <button class="btn btn-primary" @onclick="AddToCart">
+                <i class="oi oi-cart"></i>&nbsp;&nbsp;&nbsp;Add to Cart
+            </button>
         </div>
     </div>
 }

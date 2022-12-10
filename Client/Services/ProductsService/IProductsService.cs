@@ -11,11 +11,17 @@ namespace Ecommerce.Client.Services.ProductsService
 
         public string Meassage { get; set; }
 
+        public int CurrentPage { get; set; }
+
+        public int PageCount { get; set; }
+
+        public string LastSearchText { get; set; }
+
         public Task GetProductsAsync(string? categoryUrl = null);
 
         public Task<ServiceResponse<Product>> GetProductsAsync(int productId);
         
-        public Task SearchProducts(string SearchText);
+        public Task SearchProducts(string searchText, int page);
 
         public Task<List<string>> GetProductSearchSuggestions(string SearchText);
     }

@@ -30,6 +30,13 @@ else{
             </li>
         }
     </ul>
+    for (int i = 1; i <= ProductsService.PageCount; i++)
+    {
+        <a class="btn
+                @(i == ProductsService.CurrentPage ? "btn-info" : "btn-pitline-info")
+                page-selection"
+                href="/search/@ProductsService.LastSearchText/@i">@i</a>
+    }
 }
 
 
