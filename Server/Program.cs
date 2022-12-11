@@ -4,6 +4,7 @@ global using Ecommerce.Server.Data;
 global using Ecommerce.Server.Services.Categories;
 global using Ecommerce.Server.Services.Products;
 global using Ecommerce.Server.Services.CartService;
+global using Ecommerce.Server.Services.AuthService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IProductsService, ProductsService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartDataService, CartDataService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
